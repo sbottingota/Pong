@@ -1,4 +1,3 @@
-import numpy as np
 import random
 
 import pygame
@@ -48,8 +47,8 @@ class Ball(pygame.sprite.Sprite):
     def __init__(self, x, y, r, *groups):
         super().__init__(*groups)
 
-        self.image = pygame.Surface((r * 2,) * 2)
-        self.image.fill(BG_COLOR)
+        self.image = pygame.Surface((r * 2,) * 2, pygame.SRCALPHA, 32)
+        self.image = self.image.convert_alpha()
 
         pygame.draw.circle(self.image, FG_COLOR, (r, r), r)
 
@@ -121,7 +120,7 @@ while True:
         ball.dx *= -1
         ball.dy *= random.uniform(0.8, 1.2)
 
-    if not (0 < ball.rect.y and ball.rect.y + 2 * ball.radius < SCREEN_HEIGHT):
+    if not (0 < ball.rect.y and ball.rect.y + ball.rect.height < SCREEN_HEIGHT):
         ball.dy *= random.uniform(-1.2, -0.8)
 
     if not 0 < ball.rect.x < SCREEN_WIDTH:
