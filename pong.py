@@ -8,7 +8,6 @@ from pygame.locals import (
     QUIT
 )
 
-
 BG_COLOR = (255,) * 3
 FG_COLOR = (0,) * 3
 
@@ -66,13 +65,12 @@ class Ball(pygame.sprite.Sprite):
         self.rect.x += self.dx * SPEED_MULTIPLIER
         self.rect.y += self.dy * SPEED_MULTIPLIER
 
-pygame.init()
 
+pygame.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 clock = pygame.time.Clock()
-
 
 sprites = pygame.sprite.Group()
 
@@ -114,13 +112,13 @@ while True:
     if keys_pressed[K_DOWN]:
         right_paddle.rect.y += SPEED_MULTIPLIER
 
-    if ball.rect.colliderect(left_paddle.rect)\
+    if ball.rect.colliderect(left_paddle.rect) \
             or ball.rect.colliderect(right_paddle.rect):
         ball.dx *= -1
-        
+
         # fix irregular collisions
         while not (ball.rect.colliderect(left_paddle.rect)
-                or ball.rect.colliderect(right_paddle)):
+                   or ball.rect.colliderect(right_paddle.rect)):
             ball.rect.x += ball.dx
 
         ball.dy += random.uniform(-0.2, 0.2)
@@ -138,4 +136,3 @@ while True:
     clock.tick(120)
 
 pygame.quit()
-
