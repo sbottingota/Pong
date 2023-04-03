@@ -114,11 +114,16 @@ while True:
     if keys_pressed[K_DOWN]:
         right_paddle.rect.y += SPEED_MULTIPLIER
 
-
     if ball.rect.colliderect(left_paddle.rect)\
             or ball.rect.colliderect(right_paddle.rect):
         ball.dx *= -1
-        ball.dy *= random.uniform(0.8, 1.2)
+        
+        # fix irregular collisions
+        while not (ball.rect.colliderect(left_paddle.rect)
+                or ball.rect.colliderect(right_paddle)):
+            ball.rect.x += ball.dx
+
+        ball.dy += random.uniform(-0.2, 0.2)
 
     if not (0 < ball.rect.y and ball.rect.y + ball.rect.height < SCREEN_HEIGHT):
         ball.dy *= random.uniform(-1.2, -0.8)
