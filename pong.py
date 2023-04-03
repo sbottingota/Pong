@@ -47,7 +47,7 @@ class Ball(pygame.sprite.Sprite):
     def __init__(self, x, y, r, *groups):
         super().__init__(*groups)
 
-        self.image = pygame.Surface((r * 2,) * 2, pygame.SRCALPHA, 32)
+        self.image = pygame.Surface((r * 2,) * 2, pygame.SRCALPHA)
         self.image = self.image.convert_alpha()
 
         pygame.draw.circle(self.image, FG_COLOR, (r, r), r)
